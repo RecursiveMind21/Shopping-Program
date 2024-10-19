@@ -140,7 +140,30 @@ int validatePassword(string username, string password) {
 
     return 0;  // Password is valid
 }
+int validateDOB(string DOB){
+    if(DOB.length() != 8)
+        return 1;
+    
+    string dates = DOB.substr(0,2);
+    int date = stoi(dates);
 
+    if(date <= 0 || date >= 31)
+        return 1;
+
+    string months = DOB.substr(2,2);
+    int month = stoi(months);
+
+    if(month <= 0 || month >= 13)
+        return 1;
+
+    string years = DOB.substr(4,4);
+    int year = stoi(years);
+
+    if(year <= 1950 || year >= 2007)
+        return 1;
+
+    return 0;
+}
 
 //------------------------------------------------------------------------------------------------------------
                                     //->Validation Ends<-//
@@ -157,6 +180,13 @@ void Register() {
     cin >> name;
     cout << "Enter your date of birth (DDMMYYYY): ";
     cin >> DOB;
+
+    // Password validation loop
+    while (validateDOB(DOB) == 1) {
+        cout << "Enter valid DOB(DDMMYYYY): ";
+        cin >> DOB;
+    }
+
     cout << "Enter username (Format -> ABCD1234): ";
     cin >> username;
 
@@ -179,14 +209,9 @@ void Register() {
     cin >> password;
 
     // Password validation loop
-    while (true) {
-        int passwordValidation = validatePassword(username, password);
-        if (passwordValidation == 1) {
-            cout << "Invalid password (password must be alphanumeric and at least 4 characters long): ";
-            cin >> password;
-        }else {
-            break;  // Password is valid and unique
-        }
+    while (validatePassword(username, password) == 1) {
+        cout << "Invalid password (password must be alphanumeric and at least 4 characters long): ";
+        cin >> password;
     }
 
     cout << "-------------------------------------------" << endl;
