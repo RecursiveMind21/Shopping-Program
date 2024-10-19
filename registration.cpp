@@ -121,21 +121,6 @@ int validateUsername(string username) {
 
     return 0;
 }
-int findPassword(string username, string password) {
-    int hashindex = hashfunction(username);
-
-    if (RegVal.mainArr[hashindex] == nullptr)
-        return 0;
-    
-    registrationData* temp = RegVal.mainArr[hashindex];
-    while (temp != nullptr) {
-        if (temp->username == username && temp->password == password) 
-            return 1;  // Password exists for this username
-        temp = temp->next;
-    }
-    return 0;  // No matching username and password found
-}
-
 int validatePassword(string username, string password) {
     if (password.length() < 4)
         return 1;  // Password is too short
@@ -152,9 +137,6 @@ int validatePassword(string username, string password) {
 
     if (!(alphabets && numbers))
         return 1;  // Password must be alphanumeric
-
-    if (findPassword(username, password) == 1)
-        return 2;  // Password already exists for this username
 
     return 0;  // Password is valid
 }
@@ -202,11 +184,7 @@ void Register() {
         if (passwordValidation == 1) {
             cout << "Invalid password (password must be alphanumeric and at least 4 characters long): ";
             cin >> password;
-        } else if (passwordValidation == 2) {
-            cout << "Password already exists for this username! \n";
-            cout << "Enter a different password: ";
-            cin >> password;
-        } else {
+        }else {
             break;  // Password is valid and unique
         }
     }
