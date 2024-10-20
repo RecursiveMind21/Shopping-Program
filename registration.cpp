@@ -1,3 +1,6 @@
+#ifndef REGISTRATION_CPP
+#define REGISTRATION_CPP
+
 #include<iostream>
 #include<string>
 #include<vector>
@@ -213,8 +216,10 @@ void Register() {
         cout << "Invalid password (password must be alphanumeric and at least 4 characters long): ";
         cin >> password;
     }
+    
 
     cout << "-------------------------------------------" << endl;
+    cout << "Registration Successful " << endl;
 
     // Create new registration data object
     registrationData* newvalue = new registrationData(name, DOB, username, password);
@@ -225,3 +230,5 @@ void Register() {
     // Insert the new entry into the hash table
     RegVal.insertValues(index, newvalue);
 }
+
+#endif

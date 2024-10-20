@@ -4,6 +4,7 @@
 #include<algorithm>
 #include<math.h>
 #include"registration.cpp"
+#include"login.cpp"
 
 using namespace std;
 
@@ -18,13 +19,14 @@ int main() {
     while (choice) {
         int firstoption;
         cout << "1. Register " << endl << "2. Log In" << endl;
+        cout << "Enter your choice: ";
         cin >> firstoption;
 
     s1:
         if (firstoption == 1) {   // Registration
             Register();
         } else if (firstoption == 2) {  // Login
-            cout << "Log In functionality not implemented yet!" << endl;
+            Login();
         } else {  // Invalid input
             cout << "Invalid selection! ";
             goto s1;
