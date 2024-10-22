@@ -1,43 +1,43 @@
-#include<iostream>
-#include<string>
-#include<vector>
-#include<algorithm>
-#include<math.h>
-#include"registration.cpp"
-#include"login.cpp"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <math.h>
+#include "registration.cpp"
+#include "login.cpp"
+#include "home.cpp"
 
 using namespace std;
 
+bool isLoggedIn = false;  // New variable to track login status
+
 int main() {
-    int choice;
 
-    cout << "----------------------------------------------------" << endl;
-    cout << "DO YOU WANT TO ENTER (1 TO CONTINUE, 0 TO EXIT): ";
-    cin >> choice;
-    cout << "----------------------------------------------------" << endl;
+  while (1) {
+    int firstoption;
+    cout << "1. Register " << endl << "2. Log In" << endl << "3. Exit" << endl;
+    cout << "Enter your choice: ";
+    cin >> firstoption;
 
-    while (choice) {
-        int firstoption;
-        cout << "1. Register " << endl << "2. Log In" << endl;
-        cout << "Enter your choice: ";
-        cin >> firstoption;
-
-    s1:
-        if (firstoption == 1) {   // Registration
-            Register();
-        } else if (firstoption == 2) {  // Login
-            Login();
-        } else {  // Invalid input
-            cout << "Invalid selection! ";
-            goto s1;
-        }
-
-        // Ask the user again if they want to continue
-        cout << "----------------------------------------------------" << endl;
-        cout << "DO YOU WANT TO ENTER AGAIN (1 TO CONTINUE, 0 TO EXIT): ";
-        cin >> choice;
-        cout << "----------------------------------------------------" << endl;
+  s1:
+    if (firstoption == 1) {   // Registration
+      Register();
+    } else if (firstoption == 2) {  // Login
+      Login();
+      isLoggedIn = true;  // Set to true after successful login
+    } else if (firstoption == 3){
+      return 0;
+    } else {  // Invalid input
+      cout << "Invalid selection! ";
+      goto s1;
     }
 
-    return 0;
+    // Check login status and display appropriate menu
+    if (isLoggedIn) {
+      homepage();
+      isLoggedIn = false; // Reset login status after exiting home menu
+    }
+  }
+
+  return 0;
 }
